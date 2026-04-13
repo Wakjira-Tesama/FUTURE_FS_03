@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 const navLinks = [
   { label: "Programs", href: "#programs" },
@@ -15,6 +14,15 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const scrollToHash = (href: string) => {
+    const id = href.startsWith("#") ? href.slice(1) : href;
+    if (!id) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
@@ -24,11 +32,20 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-card border-b border-border/30 py-3" : "bg-transparent py-5"
+        scrolled
+          ? "glass-card border-b border-border/30 py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
-        <a href="#" className="text-2xl font-black tracking-tight">
+        <a
+          href="#"
+          className="text-2xl font-black tracking-tight"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           <span className="gradient-text">APEX</span>
           <span className="text-foreground">FIT</span>
         </a>
@@ -39,12 +56,24 @@ const Navbar = () => {
             <a
               key={link.label}
               href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToHash(link.href);
+              }}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </a>
           ))}
-          <Button variant="hero" size="sm" onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}>
+          <Button
+            variant="hero"
+            size="sm"
+            onClick={() =>
+              document
+                .getElementById("pricing")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
             Join Now
           </Button>
         </div>
@@ -65,13 +94,27 @@ const Navbar = () => {
             <a
               key={link.label}
               href={link.href}
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileOpen(false);
+                scrollToHash(link.href);
+              }}
               className="block py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </a>
           ))}
-          <Button variant="hero" className="w-full mt-3" size="sm" onClick={() => { setMobileOpen(false); document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" }); }}>
+          <Button
+            variant="hero"
+            className="w-full mt-3"
+            size="sm"
+            onClick={() => {
+              setMobileOpen(false);
+              document
+                .getElementById("pricing")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             Join Now
           </Button>
         </div>

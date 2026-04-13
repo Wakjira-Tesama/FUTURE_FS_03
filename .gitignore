@@ -1,0 +1,25 @@
+# Node
+**/node_modules/
+**/dist/
+**/build/
+
+# Vite / bundlers
+**/.vite/
+
+# Env files
+**/.env
+**/.env.*
+!.env.example
+
+# Logs
+**/*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Python
+.venv/
+__pycache__/
+*.pyc

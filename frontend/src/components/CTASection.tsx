@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { toast } from "sonner";
 
 const CTASection = () => (
   <section className="py-24 relative overflow-hidden">
@@ -11,14 +10,29 @@ const CTASection = () => (
           Ready to <span className="gradient-text">Transform</span>?
         </h2>
         <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-          Join 10,000+ members who chose to invest in themselves. Your first week is on us.
+          Join 10,000+ members who chose to invest in themselves. Your first
+          week is on us.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button variant="hero" size="lg" className="text-base px-10" onClick={() => { document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" }); toast.success("Choose a plan to start your free trial!"); }}>
+          <Button
+            variant="hero"
+            size="lg"
+            className="text-base px-10"
+            onClick={() =>
+              document
+                .getElementById("pricing")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
             Start Free Trial <ArrowRight className="ml-2" size={18} />
           </Button>
-          <Button variant="heroOutline" size="lg" className="text-base px-10" onClick={() => toast.info("Tour booking coming soon! Call us at +1 (555) 123-4567")}>
-            Book a Tour
+          <Button
+            variant="heroOutline"
+            size="lg"
+            className="text-base px-10"
+            asChild
+          >
+            <a href="tel:+15551234567">Book a Tour</a>
           </Button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import { toast } from "sonner";
 import heroImg from "@/assets/hero-gym.jpg";
 
 const phrases = [
@@ -32,7 +31,9 @@ const HeroSection = () => {
 
     const timer = setTimeout(() => {
       setDisplayed(
-        isDeleting ? current.slice(0, displayed.length - 1) : current.slice(0, displayed.length + 1)
+        isDeleting
+          ? current.slice(0, displayed.length - 1)
+          : current.slice(0, displayed.length + 1),
       );
     }, speed);
     return () => clearTimeout(timer);
@@ -73,30 +74,62 @@ const HeroSection = () => {
             <span className="text-foreground">Start Today.</span>
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-lg mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            Join the smartest fitness platform. AI-powered training, expert coaches,
-            and a community that pushes you beyond your limits.
+          <p
+            className="text-lg text-muted-foreground max-w-lg mb-8 animate-fade-in-up"
+            style={{ animationDelay: "0.2s" }}
+          >
+            Join the smartest fitness platform. AI-powered training, expert
+            coaches, and a community that pushes you beyond your limits.
           </p>
 
-          <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-            <Button variant="hero" size="lg" className="text-base px-8" onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}>
-              Start Your Transformation <ArrowRight className="ml-2" size={18} />
+          <div
+            className="flex flex-wrap gap-4 animate-fade-in-up"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <Button
+              variant="hero"
+              size="lg"
+              className="text-base px-8"
+              onClick={() =>
+                document
+                  .getElementById("pricing")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Start Your Transformation{" "}
+              <ArrowRight className="ml-2" size={18} />
             </Button>
-            <Button variant="heroOutline" size="lg" className="text-base px-8" onClick={() => toast.info("Tour video coming soon!")}>
+            <Button
+              variant="heroOutline"
+              size="lg"
+              className="text-base px-8"
+              onClick={() =>
+                document
+                  .getElementById("testimonials")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
               <Play className="mr-2" size={18} /> Watch Tour
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="flex gap-10 mt-12 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
+          <div
+            className="flex gap-10 mt-12 animate-fade-in-up"
+            style={{ animationDelay: "0.6s" }}
+          >
             {[
               { value: "10K+", label: "Active Members" },
               { value: "50+", label: "Expert Trainers" },
               { value: "98%", label: "Satisfaction" },
             ].map((stat) => (
               <div key={stat.label}>
-                <div className="text-3xl font-black gradient-text">{stat.value}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+                <div className="text-3xl font-black gradient-text">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
